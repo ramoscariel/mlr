@@ -44,5 +44,12 @@ plt.legend()
 plt.grid()
 plt.show()
 
-from sklearn.metrics import r2_score
+# Evaluación
+import statsmodels.api as sm
+X_with_const = sm.add_constant(X)
+model_sm = sm.OLS(y, X_with_const).fit()
+print(model_sm.summary()) # P Valor
+
+from sklearn.metrics import r2_score, root_mean_squared_error
 print("R²:", r2_score(y_test, y_pred))
+print("RMSE:", root_mean_squared_error(y_test, y_pred))
